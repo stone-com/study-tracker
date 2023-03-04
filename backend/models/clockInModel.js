@@ -6,11 +6,13 @@ const ClockInSchema = new mongoose.Schema({
     required: true,
   },
   user: {
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: 'User',
-    },
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'User',
+  },
+  isClockedOut: {
+    type: Boolean,
+    default: false,
   },
 });
 
