@@ -40,6 +40,7 @@ const createClockOut = asyncHandler(async (req, res) => {
       return res.status(404).json({ message: 'No clock-in record found' });
     }
     const endTime = new Date();
+    // Calculate hours worked, then divide to convert miliseconds to hours
     const hoursWorked = (endTime - clockIn.startTime) / 3600000;
     const clockOut = new ClockOut({
       endTime,
