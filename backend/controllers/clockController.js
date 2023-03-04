@@ -4,7 +4,7 @@ const ClockOut = require('../models/clockOutModel');
 const User = require('../models/userModel');
 
 // Create a new clock in
-// Post /api/clockIn
+// Post /api/clock/clockIn
 const createClockIn = asyncHandler(async (req, res) => {
   // Get user from req.user (set in Auth middleware)
   const user = await User.findById(req.user.id);
@@ -22,7 +22,7 @@ const createClockIn = asyncHandler(async (req, res) => {
 });
 
 // Create a new clock in
-// Post /api/clockOut
+// Post /api/clock/clockOut
 const createClockOut = asyncHandler(async (req, res) => {
   // Get user from req.user (set in Auth middleware)
   const user = await User.findById(req.user.id);
