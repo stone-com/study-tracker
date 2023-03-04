@@ -16,6 +16,4 @@ const ClockInSchema = new mongoose.Schema({
   },
 });
 
-const ClockIn = mongoose.model('ClockIn', ClockInSchema);
-
-module.exports = { ClockIn, ClockOut };
+module.exports = mongoose.model('ClockIn', ClockInSchema);

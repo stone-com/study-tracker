@@ -24,6 +24,4 @@ const ClockOutSchema = new mongoose.Schema({
   },
 });
 
-const ClockOut = mongoose.model('ClockOut', ClockOutSchema);
-
-module.exports = { ClockIn, ClockOut };
+module.exports = mongoose.model('ClockOut', ClockOutSchema);
