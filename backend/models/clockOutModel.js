@@ -5,6 +5,10 @@ const ClockOutSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  startTime: {
+    type: Date,
+    required: true,
+  },
   hoursWorked: {
     type: Number,
     required: true,

@@ -41,7 +41,13 @@ const createClockOut = asyncHandler(async (req, res) => {
     }
     const endTime = new Date();
     const hoursWorked = (endTime - clockIn.startTime) / 3600000;
-    const clockOut = new ClockOut({ endTime, hoursWorked, user: user._id });
+    const clockOut = new ClockOut({
+      endTime,
+      startTime: clockIn.startTime,
+      hoursWorked,
+      user: user._id,
+      comment: req.body.comment,
+    });
 
     // Set isClockedOut on clockIn to true
     clockIn.isClockedOut = true;
