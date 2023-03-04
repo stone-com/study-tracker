@@ -1,4 +1,6 @@
 const asyncHandler = require('express-async-handler');
+const ClockIn = require('../models/clockInModel');
+const ClockOut = require('../models/clockOutModel');
 
 // Create a new clock in
 // Post /api/clockIn
