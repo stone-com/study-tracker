@@ -14,6 +14,11 @@ const studySchema = mongoose.Schema(
     description: {
       type: String,
     },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+    },
   },
   {
     timestamps: true,
