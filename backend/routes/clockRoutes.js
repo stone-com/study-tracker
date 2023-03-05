@@ -4,6 +4,7 @@ const {
   createClockIn,
   createClockOut,
   getClockouts,
+  getMostRecentClockIn,
 } = require('../controllers/clockController');
 
 const { protect } = require('../middleware/authMiddleware');
@@ -12,5 +13,6 @@ const { protect } = require('../middleware/authMiddleware');
 router.post('/clockin', protect, createClockIn);
 router.post('/clockout', protect, createClockOut);
 router.get('/', protect, getClockouts);
+router.get('/mostRecent', protect, getMostRecentClockIn);
 
 module.exports = router;

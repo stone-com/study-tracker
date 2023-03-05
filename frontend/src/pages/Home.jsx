@@ -5,6 +5,7 @@ import {
   useGetClockOutsQuery,
   useAddClockInMutation,
   useAddClockOutMutation,
+  useGetMostRecentClockInQuery,
 } from '../features/clock/clockApi';
 
 const Home = () => {
@@ -23,6 +24,8 @@ const Home = () => {
     error,
   } = useGetClockOutsQuery();
 
+  const { data: mostRecentClockIn } = useGetMostRecentClockInQuery();
+
   console.log(clockOuts);
 
   useEffect(() => {
@@ -35,6 +38,10 @@ const Home = () => {
     <>
       <div>Hello {user && user.name}</div>
       <div>
+        You are currently clocked{' '}
+        {mostRecentClockIn?.isClockedOut ? 'Out' : 'In'}
+      </div>
+      <div>
         {clockOuts &&
           clockOuts.map((clockout) => (
             <div>
@@ -42,12 +49,15 @@ const Home = () => {
             </div>
           ))}
       </div>
-      <div>
-        <button onClick={clockIn}>CLOCK IN TEST</button>
-      </div>
-      <div>
-        <button onClick={clockOut}>CLOCK OUT TEST</button>
-      </div>
+      {mostRecentClockIn?.isClockedOut ? (
+        <div>
+          <button onClick={clockIn}>CLOCK IN TEST</button>
+        </div>
+      ) : (
+        <div>
+          <button onClick={clockOut}>CLOCK OUT TEST</button>
+        </div>
+      )}
     </>
   );
 };

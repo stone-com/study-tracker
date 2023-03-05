@@ -13,24 +13,29 @@ export const clockApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['ClockOuts'],
+  tagTypes: ['ClockOuts', 'MostRecentClockIn'],
   endpoints: (builder) => ({
     getClockOuts: builder.query({
       query: () => '/clock',
       providesTags: ['ClockOuts'],
+    }),
+    getMostRecentClockIn: builder.query({
+      query: () => '/clock/mostRecent',
+      providesTags: ['MostRecentClockIn'],
     }),
     addClockIn: builder.mutation({
       query: () => ({
         url: '/clock/clockin',
         method: 'POST',
       }),
+      invalidatesTags: ['MostRecentClockIn'],
     }),
     addClockOut: builder.mutation({
       query: () => ({
         url: '/clock/clockout',
         method: 'POST',
       }),
-      invalidatesTags: ['ClockOuts'],
+      invalidatesTags: ['ClockOuts', 'MostRecentClockIn'],
     }),
   }),
 });
@@ -39,4 +44,5 @@ export const {
   useGetClockOutsQuery,
   useAddClockInMutation,
   useAddClockOutMutation,
+  useGetMostRecentClockInQuery,
 } = clockApi;

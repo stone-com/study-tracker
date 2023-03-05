@@ -82,4 +82,27 @@ const getClockouts = asyncHandler(async (req, res) => {
   res.status(200).json(clockouts);
 });
 
-module.exports = { createClockIn, createClockOut, getClockouts };
+// Get the most recent clockIn
+// GET /api/clock/
+const getMostRecentClockIn = asyncHandler(async (req, res) => {
+  // Get user from req.user (set in Auth middleware)
+  const user = await User.findById(req.user.id);
+
+  if (!user) {
+    res.status(401);
+    throw new Error('User not found');
+  }
+
+  const clockin = await ClockIn.findOne({ user: req.user.id }).sort({
+    $natural: -1,
+  });
+
+  res.status(200).json(clockin);
+});
+
+module.exports = {
+  createClockIn,
+  createClockOut,
+  getClockouts,
+  getMostRecentClockIn,
+};
