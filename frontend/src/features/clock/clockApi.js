@@ -13,9 +13,11 @@ export const clockApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ['ClockOuts'],
   endpoints: (builder) => ({
     getClockOuts: builder.query({
       query: () => '/clock',
+      providesTags: ['ClockOuts'],
     }),
     addClockIn: builder.mutation({
       query: () => ({
@@ -28,8 +30,13 @@ export const clockApi = createApi({
         url: '/clock/clockout',
         method: 'POST',
       }),
+      invalidatesTags: ['ClockOuts'],
     }),
   }),
 });
 
-export const { useGetClockOutsQuery, useAddClockInMutation, useAddClockOutMutation } = clockApi;
+export const {
+  useGetClockOutsQuery,
+  useAddClockInMutation,
+  useAddClockOutMutation,
+} = clockApi;
