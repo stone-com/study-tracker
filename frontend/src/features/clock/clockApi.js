@@ -17,7 +17,19 @@ export const clockApi = createApi({
     getClockOuts: builder.query({
       query: () => '/clock',
     }),
+    addClockIn: builder.mutation({
+      query: () => ({
+        url: '/clock/clockin',
+        method: 'POST',
+      }),
+    }),
+    addClockOut: builder.mutation({
+      query: () => ({
+        url: '/clock/clockout',
+        method: 'POST',
+      }),
+    }),
   }),
 });
 
-export const { useGetClockOutsQuery } = clockApi;
+export const { useGetClockOutsQuery, useAddClockInMutation, useAddClockOutMutation } = clockApi;
