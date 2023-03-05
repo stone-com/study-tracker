@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Spinner from '../components/Spinner';
+import Shift from '../components/Shift';
 import {
   useGetClockOutsQuery,
   useAddClockInMutation,
@@ -15,15 +17,10 @@ const Home = () => {
   const [clockIn] = useAddClockInMutation();
   const [clockOut] = useAddClockOutMutation();
 
-  const {
-    data: clockOuts,
-    isLoading,
-    isSuccess,
-    isError,
-    error,
-  } = useGetClockOutsQuery();
+  const { data: clockOuts, isLoading } = useGetClockOutsQuery();
 
-  const { data: mostRecentClockIn } = useGetMostRecentClockInQuery();
+  const { data: mostRecentClockIn, isLoading: recentClockinLoading } =
+    useGetMostRecentClockInQuery();
 
   console.log(clockOuts);
 
@@ -33,6 +30,9 @@ const Home = () => {
     }
   }, [user, navigate]);
 
+  if (isLoading || recentClockinLoading) {
+    return <Spinner />;
+  }
   return (
     <>
       <div>Hello {user && user.name}</div>
@@ -43,20 +43,25 @@ const Home = () => {
       <div>
         {clockOuts &&
           clockOuts.map((clockout) => (
-            <div>
-              <h1>
-                Hours worked: {Math.round(clockout.hoursWorked * 1000) / 1000}
-              </h1>
-            </div>
+            <Shift
+              startTime={clockout.startTime}
+              endTime={clockout.endTime}
+              hours={clockout.hoursWorked}
+              comment={clockout.comment}
+            />
           ))}
       </div>
       {mostRecentClockIn?.isClockedOut || !mostRecentClockIn ? (
         <div>
-          <button onClick={clockIn}>CLOCK IN TEST</button>
+          <button onClick={clockIn} className='btn btn-block'>
+            CLOCK IN
+          </button>
         </div>
       ) : (
         <div>
-          <button onClick={clockOut}>CLOCK OUT TEST</button>
+          <button onClick={clockOut} className='btn btn-block'>
+            CLOCK OUT
+          </button>
         </div>
       )}
     </>

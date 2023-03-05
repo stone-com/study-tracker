@@ -57,48 +57,53 @@ const Register = () => {
 
   return (
     <div>
-      <h1>Sign Up</h1>
-      <form onSubmit={onSubmit}>
-        <div>
-          <input
-            type='text'
-            name='name'
-            value={name}
-            onChange={onChange}
-            placeholder='Name'
-          />
-        </div>
-        <div>
-          <input
-            type='text'
-            name='email'
-            value={email}
-            onChange={onChange}
-            placeholder='Email'
-          />
-        </div>
-        <div>
-          <input
-            type='password'
-            name='password'
-            value={password}
-            onChange={onChange}
-            placeholder='Enter your password'
-          />
-        </div>
-        <div>
-          <input
-            type='password'
-            name='password2'
-            value={password2}
-            onChange={onChange}
-            placeholder='Confirm your password'
-          />
-        </div>
-        <div>
-          <button type='submit'>Sign Up</button>
-        </div>
-      </form>
+      <section className='heading'>
+        <h1>Register</h1>
+        <p>Please create an account</p>
+      </section>
+      <section className='form'>
+        <form onSubmit={onSubmit}>
+          <div className='form-group'>
+            <input
+              type='text'
+              name='name'
+              value={name}
+              onChange={onChange}
+              placeholder='Name'
+            />
+          </div>
+          <div className='form-group'>
+            <input
+              type='text'
+              name='email'
+              value={email}
+              onChange={onChange}
+              placeholder='Email'
+            />
+          </div>
+          <div className='form-group'>
+            <input
+              type='password'
+              name='password'
+              value={password}
+              onChange={onChange}
+              placeholder='Enter your password'
+            />
+          </div>
+          <div className='form-group'>
+            <input
+              type='password'
+              name='password2'
+              value={password2}
+              onChange={onChange}
+              placeholder='Confirm your password'
+            />
+          </div>
+          <div className='form-group'>
+            <button type='submit' className='btn btn-block'>Sign Up</button>
+          </div>
+        </form>
+      </section>
     </div>
   );
 };

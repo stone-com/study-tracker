@@ -54,30 +54,37 @@ const Login = () => {
 
   return (
     <div>
-      <h1>Login</h1>
-      <form onSubmit={onSubmit}>
-        <div>
-          <input
-            type='text'
-            name='email'
-            value={email}
-            onChange={onChange}
-            placeholder='Email'
-          />
-        </div>
-        <div>
-          <input
-            type='password'
-            name='password'
-            value={password}
-            onChange={onChange}
-            placeholder='Password'
-          />
-        </div>
-        <div>
-          <button type='submit'>Login</button>
-        </div>
-      </form>
+      <section className='heading'>
+        <h1>Login</h1>
+        <p>Please log in</p>
+      </section>
+      <section className='form'>
+        <form onSubmit={onSubmit}>
+          <div className='form-group'>
+            <input
+              type='text'
+              name='email'
+              value={email}
+              onChange={onChange}
+              placeholder='Email'
+            />
+          </div>
+          <div className='form-group'>
+            <input
+              type='password'
+              name='password'
+              value={password}
+              onChange={onChange}
+              placeholder='Password'
+            />
+          </div>
+          <div className='form-group'>
+            <button type='submit' className='btn btn-block'>
+              Login
+            </button>
+          </div>
+        </form>
+      </section>
     </div>
   );
 };
