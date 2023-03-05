@@ -12,12 +12,16 @@ const createClockIn = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error('User not found');
   }
-  try {
-    const clockIn = new ClockIn({ startTime: new Date(), user: user._id });
-    await clockIn.save();
+  const clockIn = await ClockIn.create({
+    startTime: new Date(),
+    user: user._id,
+  });
+
+  if (clockIn) {
     res.status(201).json(clockIn);
-  } catch (err) {
-    throw new Error(err.message);
+  } else {
+    res.status(400);
+    throw new Error('Could not clock in');
   }
 });
 
@@ -30,35 +34,35 @@ const createClockOut = asyncHandler(async (req, res) => {
     res.status(401);
     throw new Error('User not found');
   }
-  try {
-    // Find most recent clockIn, sort by natural -1 to get most recent instead of first
-    const clockIn = await ClockIn.findOne({
-      user: user._id,
-      isClockedOut: false,
-    }).sort({ $natural: -1 });
-    if (!clockIn) {
-      return res.status(404).json({ message: 'No clock-in record found' });
-    }
-    const endTime = new Date();
-    // Calculate hours worked, then divide to convert miliseconds to hours
-    const hoursWorked = (endTime - clockIn.startTime) / 3600000;
-    const clockOut = new ClockOut({
-      endTime,
-      startTime: clockIn.startTime,
-      hoursWorked,
-      user: user._id,
-      comment: req.body.comment,
-    });
 
+  // Find most recent clockIn, sort by natural -1 to get most recent instead of first
+  const clockIn = await ClockIn.findOne({
+    user: user._id,
+    isClockedOut: false,
+  }).sort({ $natural: -1 });
+  if (!clockIn) {
+    return res.status(404).json({ message: 'No clock-in record found' });
+  }
+  const endTime = new Date();
+  // Calculate hours worked, then divide to convert miliseconds to hours
+  const hoursWorked = (endTime - clockIn.startTime) / 3600000;
+  const clockOut = await ClockOut.create({
+    endTime,
+    startTime: clockIn.startTime,
+    hoursWorked,
+    user: user._id,
+    comment: req.body.comment,
+  });
+  if (clockOut) {
     // Set isClockedOut on clockIn to true
     clockIn.isClockedOut = true;
 
     // Save clockIn and clockOut
     await clockIn.save();
-    await clockOut.save();
     res.status(201).json(clockOut);
-  } catch (err) {
-    throw new Error(err.message);
+  } else {
+    res.status(400);
+    throw new Error('Could not clock out');
   }
 });
 
