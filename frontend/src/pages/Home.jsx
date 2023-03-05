@@ -34,23 +34,14 @@ const Home = () => {
     return <Spinner />;
   }
   return (
-    <>
-      <div>Hello {user && user.name}</div>
-      <div>
-        You are currently clocked{' '}
-        {mostRecentClockIn?.isClockedOut || !mostRecentClockIn ? 'Out' : 'In'}
-      </div>
-      <div>
-        {clockOuts &&
-          clockOuts.map((clockout) => (
-            <Shift
-              startTime={clockout.startTime}
-              endTime={clockout.endTime}
-              hours={clockout.hoursWorked}
-              comment={clockout.comment}
-            />
-          ))}
-      </div>
+    <div>
+      <section className='heading'>
+        <h1>Hello {user && user.name}</h1>
+        <p>
+          You are currently clocked{' '}
+          {mostRecentClockIn?.isClockedOut || !mostRecentClockIn ? 'Out' : 'In'}
+        </p>
+      </section>
       {mostRecentClockIn?.isClockedOut || !mostRecentClockIn ? (
         <div>
           <button onClick={clockIn} className='btn btn-block'>
@@ -64,7 +55,18 @@ const Home = () => {
           </button>
         </div>
       )}
-    </>
+      <div className='container'>
+        {clockOuts &&
+          clockOuts.map((clockout) => (
+            <Shift
+              startTime={clockout.startTime}
+              endTime={clockout.endTime}
+              hours={clockout.hoursWorked}
+              comment={clockout.comment}
+            />
+          )).reverse()}
+      </div>
+    </div>
   );
 };
 export default Home;
