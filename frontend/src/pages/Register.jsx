@@ -2,22 +2,21 @@ import React, { useState } from 'react';
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    username: '',
+    email: '',
     password: '',
     name: '',
   });
 
-  const { username, password, name } = formData;
+  const { email, password, name } = formData;
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+  const onChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
-  const handleSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
     // Perform sign up logic here
   };
@@ -25,15 +24,10 @@ const Register = () => {
   return (
     <div>
       <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={onSubmit}>
         <div>
-          <label>Username:</label>
-          <input
-            type='text'
-            name='username'
-            value={username}
-            onChange={handleChange}
-          />
+          <label>Email:</label>
+          <input type='text' name='email' value={email} onChange={onChange} />
         </div>
         <div>
           <label>Password:</label>
@@ -41,12 +35,12 @@ const Register = () => {
             type='password'
             name='password'
             value={password}
-            onChange={handleChange}
+            onChange={onChange}
           />
         </div>
         <div>
           <label>Name:</label>
-          <input type='text' name='name' value={name} onChange={handleChange} />
+          <input type='text' name='name' value={name} onChange={onChange} />
         </div>
         <button type='submit'>Sign Up</button>
       </form>
