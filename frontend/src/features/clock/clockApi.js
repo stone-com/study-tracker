@@ -18,6 +18,7 @@ export const clockApi = createApi({
     getClockOuts: builder.query({
       query: () => '/clock',
       providesTags: ['ClockOuts'],
+      invalidatesTags: ['MostRecentClockIn']
     }),
     getMostRecentClockIn: builder.query({
       query: () => '/clock/mostRecent',

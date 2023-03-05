@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
   useGetClockOutsQuery,
@@ -11,7 +11,6 @@ import {
 const Home = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
 
   const [clockIn] = useAddClockInMutation();
   const [clockOut] = useAddClockOutMutation();
@@ -39,17 +38,19 @@ const Home = () => {
       <div>Hello {user && user.name}</div>
       <div>
         You are currently clocked{' '}
-        {mostRecentClockIn?.isClockedOut ? 'Out' : 'In'}
+        {mostRecentClockIn?.isClockedOut || !mostRecentClockIn ? 'Out' : 'In'}
       </div>
       <div>
         {clockOuts &&
           clockOuts.map((clockout) => (
             <div>
-              <h1>Hours worked: {clockout.hoursWorked}</h1>
+              <h1>
+                Hours worked: {Math.round(clockout.hoursWorked * 1000) / 1000}
+              </h1>
             </div>
           ))}
       </div>
-      {mostRecentClockIn?.isClockedOut ? (
+      {mostRecentClockIn?.isClockedOut || !mostRecentClockIn ? (
         <div>
           <button onClick={clockIn}>CLOCK IN TEST</button>
         </div>
