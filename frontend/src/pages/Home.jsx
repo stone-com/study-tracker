@@ -1,4 +1,6 @@
+import { useSelector, useDispatch } from 'react-redux';
 const Home = () => {
-  return <div>Home</div>;
+  const { user } = useSelector((state) => state.auth);
+  return <div>Hello {user.name}</div>;
 };
 export default Home;
