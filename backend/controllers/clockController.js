@@ -66,4 +66,20 @@ const createClockOut = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { createClockIn, createClockOut };
+// Get user clockouts
+// GET /api/clock/
+const getClockouts = asyncHandler(async (req, res) => {
+  // Get user from req.user (set in Auth middleware)
+  const user = await User.findById(req.user.id);
+
+  if (!user) {
+    res.status(401);
+    throw new Error('User not found');
+  }
+
+  const clockouts = await ClockOut.find({ user: req.user.id });
+
+  res.status(200).json(clockouts);
+});
+
+module.exports = { createClockIn, createClockOut, getClockouts };

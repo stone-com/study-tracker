@@ -10,8 +10,8 @@ const Home = () => {
     if (!user) {
       navigate('/login');
     }
-  }, []);
-  
+  }, [user, navigate]);
+
   return <div>Hello {user && user.name}</div>;
 };
 export default Home;
