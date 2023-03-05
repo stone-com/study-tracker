@@ -57,19 +57,26 @@ const Login = () => {
       <h1>Login</h1>
       <form onSubmit={onSubmit}>
         <div>
-          <label>Email:</label>
-          <input type='text' name='email' value={email} onChange={onChange} />
+          <input
+            type='text'
+            name='email'
+            value={email}
+            onChange={onChange}
+            placeholder='Email'
+          />
         </div>
         <div>
-          <label>Password:</label>
           <input
             type='password'
             name='password'
             value={password}
             onChange={onChange}
+            placeholder='Password'
           />
         </div>
-        <button type='submit'>Login</button>
+        <div>
+          <button type='submit'>Login</button>
+        </div>
       </form>
     </div>
   );
