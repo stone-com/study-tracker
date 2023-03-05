@@ -9,7 +9,7 @@ const Shift = ({ startTime, endTime, hours, comment }) => {
       <div>Start time: {start}</div>
       <div>End time: {end}</div>
       <div>Total Hours: {roundedHours}</div>
-      <div>Comment: {comment}</div>
+      {/* <div>Comment: {comment}</div> */}
       
     </div>
   );
