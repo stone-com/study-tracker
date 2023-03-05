@@ -2,10 +2,12 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useGetClockOutsQuery } from '../features/clock/clockApi';
+import { clockApi } from '../features/clock/clockApi';
 
 const Home = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   const {
     data: clockOuts,
@@ -15,8 +17,7 @@ const Home = () => {
     error,
   } = useGetClockOutsQuery();
 
-    console.log(clockOuts);
-  
+  console.log(clockOuts);
 
   // useEffect(() => {
   //   if (!user) {
@@ -27,7 +28,6 @@ const Home = () => {
   return (
     <>
       <div>Hello {user && user.name}</div>
-      <div>{}</div>
     </>
   );
 };

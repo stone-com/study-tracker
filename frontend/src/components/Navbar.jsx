@@ -1,6 +1,7 @@
 import { FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { clockApi } from '../features/clock/clockApi';
 import { logout, reset } from '../features/auth/authSlice';
 
 const Navbar = () => {
@@ -11,6 +12,7 @@ const Navbar = () => {
   const onLogout = () => {
     dispatch(logout());
     dispatch(reset());
+    dispatch(clockApi.util.resetApiState());
     navigate('/');
   };
 
