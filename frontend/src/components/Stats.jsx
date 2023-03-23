@@ -3,7 +3,7 @@ import { useGetClockOutsQuery } from '../features/clock/clockApi';
 const Stats = () => {
   const { data } = useGetClockOutsQuery();
   const hoursArray = data?.map((data) => data.hoursWorked);
-  const totalHours = hoursArray.reduce((a, b) => a + b, 0).toFixed(2);
+  const totalHours = hoursArray?.reduce((a, b) => a + b, 0).toFixed(2);
   const averageHours = (totalHours / hoursArray.length).toFixed(2);
   const hourlyPay = 0.5;
 
