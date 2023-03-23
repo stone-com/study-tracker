@@ -23,11 +23,6 @@ const Home = () => {
   const { data: mostRecentClockIn, isLoading: recentClockinLoading } =
     useGetMostRecentClockInQuery();
 
-  const clockInTime = new Date(mostRecentClockIn?.startTime).toLocaleTimeString(
-    'en-US'
-  );
-  console.log(clockInTime);
-
   useEffect(() => {
     if (!user) {
       navigate('/login');
