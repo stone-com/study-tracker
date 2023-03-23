@@ -41,10 +41,11 @@ const Home = () => {
           {mostRecentClockIn?.isClockedOut || !mostRecentClockIn ? 'Out' : 'In'}
         </p>
         <p>
-          {!mostRecentClockIn?.isClockedOut &&
-            `Clocked in at ${new Date(
-              mostRecentClockIn.startTime
-            ).toLocaleTimeString('en-US')}`}
+          {mostRecentClockIn & !mostRecentClockIn?.isClockedOut
+            ? `Clocked in at ${new Date(
+                mostRecentClockIn.startTime
+              ).toLocaleTimeString('en-US')}`
+            : null}
         </p>
       </section>
       <Stats />
@@ -70,6 +71,7 @@ const Home = () => {
                 endTime={clockout.endTime}
                 hours={clockout.hoursWorked}
                 comment={clockout.comment}
+                key={clockout._id}
               />
             ))
             .reverse()}
