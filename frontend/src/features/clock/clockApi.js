@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const clockApi = createApi({
   reducerPath: 'clockApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5500/api',
+    baseUrl: 'https://study-tracker-api.vercel.app/api',
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.user.token;
       // If we have a token set in the state, then pass it in auth header
@@ -18,7 +18,7 @@ export const clockApi = createApi({
     getClockOuts: builder.query({
       query: () => '/clock',
       providesTags: ['ClockOuts'],
-      invalidatesTags: ['MostRecentClockIn']
+      invalidatesTags: ['MostRecentClockIn'],
     }),
     getMostRecentClockIn: builder.query({
       query: () => '/clock/mostRecent',
