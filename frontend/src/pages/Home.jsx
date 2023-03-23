@@ -23,17 +23,10 @@ const Home = () => {
   const { data: mostRecentClockIn, isLoading: recentClockinLoading } =
     useGetMostRecentClockInQuery();
 
-    // Use this in the future to calculate average hours per week and total number of hours per week
-
-  // function getLastSunday() {
-  //   const date = new Date();
-  //   const today = date.getDate();
-  //   const currentDay = date.getDay();
-  //   const newDate = date.setDate(today - (currentDay || 7));
-  //   return new Date(newDate);
-  // }
-
-  // console.log(getLastSunday());
+  const clockInTime = new Date(mostRecentClockIn?.startTime).toLocaleTimeString(
+    'en-US'
+  );
+  console.log(clockInTime);
 
   useEffect(() => {
     if (!user) {
@@ -51,6 +44,12 @@ const Home = () => {
         <p>
           You are currently clocked{' '}
           {mostRecentClockIn?.isClockedOut || !mostRecentClockIn ? 'Out' : 'In'}
+        </p>
+        <p>
+          {!mostRecentClockIn?.isClockedOut &&
+            `Clocked in at ${new Date(
+              mostRecentClockIn.startTime
+            ).toLocaleTimeString('en-US')}`}
         </p>
       </section>
       <Stats />

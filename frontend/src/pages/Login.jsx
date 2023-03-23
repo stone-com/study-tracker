@@ -30,7 +30,7 @@ const Login = () => {
     e.preventDefault();
 
     const userData = {
-      email,
+      email: email.toLowerCase(),
       password,
     };
     dispatch(login(userData));
