@@ -48,7 +48,7 @@ const Register = () => {
     } else {
       const userData = {
         name,
-        email,
+        email: email.toLowerCase(),
         password,
       };
       dispatch(register(userData));
@@ -100,7 +100,9 @@ const Register = () => {
             />
           </div>
           <div className='form-group'>
-            <button type='submit' className='btn btn-block'>Sign Up</button>
+            <button type='submit' className='btn btn-block'>
+              Sign Up
+            </button>
           </div>
         </form>
       </section>
