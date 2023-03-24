@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Spinner from '../components/Spinner';
 import Shift from '../components/Shift';
 import Stats from '../components/Stats';
+import FilterSelector from '../components/FilterSelector';
 import {
   useGetClockOutsQuery,
   useAddClockInMutation,
@@ -64,6 +65,8 @@ const Home = () => {
       <h2 className='label'>Your Stats</h2>
       <Stats />
       <h2 className='label'>Your shifts</h2>
+
+      <FilterSelector />
       <div className='container'>
         {clockOuts &&
           clockOuts

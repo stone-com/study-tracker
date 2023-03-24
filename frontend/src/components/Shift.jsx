@@ -22,7 +22,7 @@ const Shift = ({ startTime, endTime, hours, paid, id }) => {
       </div>
       <div>
         {paid === true ? (
-          <div>Paid  ✅</div>
+          <div>Paid ✅</div>
         ) : (
           <button className='btn payBtn' onClick={() => markAsPaid(id)}>
             Mark as paid
