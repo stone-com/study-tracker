@@ -43,9 +43,10 @@ h1 {
   width: 100%;
   max-width: 960px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0;
   text-align: center;
 }
+
 
 .shiftContainer,
 .statsContainer {
@@ -56,6 +57,7 @@ h1 {
   border: 1px solid var(--cadet-gray);
   margin: 13px 0px;
   border-radius: 5px;
+  margin-inline: 10px;
 }
 
 .header {
@@ -141,8 +143,9 @@ h1 {
 }
 
 .btn-block {
-  width: 100%;
+  width: 50%;
   margin-bottom: 20px;
+  margin-inline: auto;
 }
 
 .btn:hover {

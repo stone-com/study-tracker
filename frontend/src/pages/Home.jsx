@@ -29,6 +29,10 @@ const Home = () => {
     }
   }, [user, navigate]);
 
+  // `Clocked in at ${new Date(
+  //   mostRecentClockIn.startTime
+  // ).toLocaleTimeString('en-US')}`
+
   if (isLoading || recentClockinLoading) {
     return <Spinner />;
   }
@@ -37,31 +41,29 @@ const Home = () => {
       <section className='heading'>
         <h1>Hello {user && user.name}</h1>
         <p>
-          You are currently clocked{' '}
-          {mostRecentClockIn?.isClockedOut || !mostRecentClockIn ? 'Out' : 'In'}
-        </p>
-        <p>
-          {mostRecentClockIn & !mostRecentClockIn?.isClockedOut
-            ? `Clocked in at ${new Date(
+          {mostRecentClockIn?.isClockedOut || !mostRecentClockIn
+            ? 'You are currently clocked out'
+            : `Clocked in at ${new Date(
                 mostRecentClockIn.startTime
-              ).toLocaleTimeString('en-US')}`
-            : null}
+              ).toLocaleTimeString('en-US')}`}
         </p>
+        {mostRecentClockIn?.isClockedOut || !mostRecentClockIn ? (
+          <div>
+            <button onClick={clockIn} className='btn btn-block'>
+              CLOCK IN
+            </button>
+          </div>
+        ) : (
+          <div>
+            <button onClick={clockOut} className='btn btn-block'>
+              CLOCK OUT
+            </button>
+          </div>
+        )}
       </section>
+      <h2 className='label'>Your Stats</h2>
       <Stats />
-      {mostRecentClockIn?.isClockedOut || !mostRecentClockIn ? (
-        <div>
-          <button onClick={clockIn} className='btn btn-block'>
-            CLOCK IN
-          </button>
-        </div>
-      ) : (
-        <div>
-          <button onClick={clockOut} className='btn btn-block'>
-            CLOCK OUT
-          </button>
-        </div>
-      )}
+      <h2 className='label'>Your shifts</h2>
       <div className='container'>
         {clockOuts &&
           clockOuts

@@ -54,7 +54,7 @@ const Stats = () => {
             Update
           </button>
         </div>
-        <div>Total Earnings: ${totalHours * hourlyRate}</div>
+        <div>Total Earnings: ${(totalHours * hourlyRate).toFixed(2)}</div>
       </div>
 
       <Modal
