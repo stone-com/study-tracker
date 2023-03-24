@@ -45,9 +45,9 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
 // update user payrate
 export const updatePay = createAsyncThunk(
   'auth/updatePay',
-  async (userInfo, thunkAPI) => {
+  async (userData, thunkAPI) => {
     try {
-      return await authService.updatePay(userInfo);
+      return await authService.updatePay(userData);
     } catch (error) {
       const message =
         (error.response &&
