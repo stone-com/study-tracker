@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Spinner from '../components/Spinner';
@@ -13,6 +13,7 @@ import {
 } from '../features/clock/clockApi';
 
 const Home = () => {
+  const [selectedOption, setSelectedOption] = useState('all');
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
 
@@ -29,10 +30,6 @@ const Home = () => {
       navigate('/login');
     }
   }, [user, navigate]);
-
-  // `Clocked in at ${new Date(
-  //   mostRecentClockIn.startTime
-  // ).toLocaleTimeString('en-US')}`
 
   if (isLoading || recentClockinLoading) {
     return <Spinner />;
@@ -66,10 +63,48 @@ const Home = () => {
       <Stats />
       <h2 className='label'>Your shifts</h2>
 
-      <FilterSelector />
-      <div className='container'>
-        {clockOuts &&
+      <FilterSelector
+        selectedOption={selectedOption}
+        setSelectedOption={setSelectedOption}
+      />
+      <div className='container shiftGroup'>
+        {selectedOption === 'all' &&
+          clockOuts &&
           clockOuts
+            .map((clockout) => (
+              <Shift
+                startTime={clockout.startTime}
+                endTime={clockout.endTime}
+                hours={clockout.hoursWorked}
+                comment={clockout.comment}
+                key={clockout._id}
+                id={clockout._id}
+                paid={clockout.paid}
+              />
+            ))
+            .reverse()}
+
+        {selectedOption === 'paid' &&
+          clockOuts &&
+          clockOuts
+            .filter((clockout) => clockout.paid === true)
+            .map((clockout) => (
+              <Shift
+                startTime={clockout.startTime}
+                endTime={clockout.endTime}
+                hours={clockout.hoursWorked}
+                comment={clockout.comment}
+                key={clockout._id}
+                id={clockout._id}
+                paid={clockout.paid}
+              />
+            ))
+            .reverse()}
+
+        {selectedOption === 'unpaid' &&
+          clockOuts &&
+          clockOuts
+            .filter((clockout) => clockout.paid === false)
             .map((clockout) => (
               <Shift
                 startTime={clockout.startTime}
