@@ -15,6 +15,10 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    hourlyRate: {
+      type: Number,
+      default: 1,
+    },
   },
   {
     timestamps: true,
