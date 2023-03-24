@@ -5,7 +5,6 @@ import UpdatePayForm from './UpdatePayForm';
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
-
 const Stats = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { data } = useGetClockOutsQuery();
@@ -21,7 +20,7 @@ const Stats = () => {
     averageHours = (totalHours / hoursArray.length).toFixed(2);
   }
 
-  const hourlyRate = user.hourlyRate | 1;
+  const hourlyRate = user.hourlyRate ? user.hourlyRate : 1;
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
@@ -35,10 +34,12 @@ const Stats = () => {
         </div>
       </div>
       <div className='statsContainer'>
-        <div>Hourly Pay: ${hourlyRate} <button onClick={openModal}>Update</button></div>
+        <div>
+          Hourly Pay: ${hourlyRate} <button onClick={openModal}>Update</button>
+        </div>
         <div>Total Earnings: ${totalHours * hourlyRate}</div>
       </div>
-      
+
       <Modal
         isOpen={isOpen}
         onRequestClose={closeModal}
