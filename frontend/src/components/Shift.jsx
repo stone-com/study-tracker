@@ -12,17 +12,27 @@ const Shift = ({ startTime, endTime, hours, paid, id }) => {
     <div className='shiftContainer'>
       <div className='shiftInfo'>
         <div>
-          <div>Date: {date}</div>
-          <div>Total Hours: {roundedHours}</div>
+          <div>
+            <strong>Date:</strong> {date}
+          </div>
+          <div>
+            <strong>Total Hours:</strong> {roundedHours}
+          </div>
         </div>
         <div>
-          <div>Start time: {start}</div>
-          <div>End time: {end}</div>
+          <div>
+            <strong>Start Time:</strong> {start}
+          </div>
+          <div>
+            <strong>End Time:</strong> {end}
+          </div>
         </div>
       </div>
       <div>
         {paid === true ? (
-          <div>Paid ✅</div>
+          <div>
+            <strong>Paid</strong> ✅
+          </div>
         ) : (
           <button className='btn payBtn' onClick={() => markAsPaid(id)}>
             Mark as paid

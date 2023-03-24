@@ -19,11 +19,6 @@ body {
   font-family: 'Poppins', sans-serif;
   height: 100vh;
   background-color: var(--robin-egg-blue);
-  padding-bottom: 15%;
-}
-
-.appContainer {
-padding-bottom: 20px;
 }
 
 a {
@@ -39,6 +34,10 @@ li {
   line-height: 2.2;
 }
 
+.logo {
+  font-weight: bolder;
+  font-size: 2rem;
+}
 h1 {
   font-weight: 600;
   margin-bottom: 10px;
@@ -74,7 +73,7 @@ h1 {
 }
 
 .shiftGroup {
-  margin-bottom: 50px;
+  padding-bottom: 70px;
 }
 
 .shiftInfo {

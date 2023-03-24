@@ -42,19 +42,25 @@ const Stats = () => {
   return (
     <>
       <div className='statsContainer'>
-        <div>Total Hours Worked: {totalHours}</div>
         <div>
-          Average Shift Length: {isNaN(averageHours) ? 0 : averageHours} hours
+          <strong>Total Hours Worked:</strong> {totalHours}
+        </div>
+        <div>
+          <strong>Average Shift Length:</strong>{' '}
+          {isNaN(averageHours) ? 0 : averageHours} hours
         </div>
       </div>
       <div className='statsContainer'>
         <div>
-          Hourly Pay: ${hourlyRate}{' '}
+          <strong>Hourly Pay:</strong> ${hourlyRate}{' '}
           <button onClick={openModal} className='openModalBtn'>
             Update
           </button>
         </div>
-        <div>Total Earnings: ${(totalHours * hourlyRate).toFixed(2)}</div>
+        <div>
+          <strong>Total Earnings:</strong> $
+          {(totalHours * hourlyRate).toFixed(2)}
+        </div>
 
         <Modal
           isOpen={isOpen}

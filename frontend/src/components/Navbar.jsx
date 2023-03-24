@@ -18,7 +18,7 @@ const Navbar = () => {
 
   return (
     <header className='header'>
-      <div className='logo'>Study Timeclock</div>
+      <div className='logo'>Timeclock App</div>
       <ul>
         {user ? (
           <li>
