@@ -115,7 +115,7 @@ export const authSlice = createSlice({
       .addCase(updatePay.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = action.payload;
+        state.user.hourlyRate = action.payload.hourlyRate;
       })
       .addCase(updatePay.rejected, (state, action) => {
         state.isLoading = false;
