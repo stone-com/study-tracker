@@ -20,9 +20,18 @@ const login = async (userData) => {
   return response.data;
 };
 
+// Update user pay
+const updatePay = async (userId, payRate) => {
+  const response = await axios.put(API_URL + 'setpay/' + userId, payRate);
+  if (response.data) {
+    localStorage.setItem('user', JSON.stringify(response.data));
+  }
+  return response.data;
+};
+
 // Logout user
 const logout = () => localStorage.removeItem('user');
 
-const authService = { register, logout, login };
+const authService = { register, logout, login, updatePay };
 
 export default authService;

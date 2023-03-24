@@ -42,6 +42,23 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
     return thunkAPI.rejectWithValue(message);
   }
 });
+// update user payrate
+export const updatePay = createAsyncThunk(
+  'auth/updatePay',
+  async (userId, payRate, thunkAPI) => {
+    try {
+      return await authService.updatePay(userId, payRate);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
 // Logout user
 export const logout = createAsyncThunk('auth/logout', async () => {
@@ -91,6 +108,19 @@ export const authSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
+      })
+      .addCase(updatePay.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updatePay.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.user = action.payload;
+      })
+      .addCase(updatePay.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       });
   },
 });
