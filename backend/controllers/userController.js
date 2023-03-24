@@ -91,7 +91,13 @@ const updatePay = asyncHandler(async (req, res) => {
   if (user) {
     user.hourlyRate = req.body.hourlyRate;
     await user.save();
-    res.status(200).json(user);
+    res.status(200).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      hourlyRate: user.hourlyRate,
+      token: generateToken(user._id),
+    });
   } else {
     res.status(400);
     throw new Error('Error updating');
