@@ -37,6 +37,7 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      hourlyRate: user.hourlyRate,
       token: generateToken(user._id),
     });
   } else {
@@ -86,7 +87,6 @@ const generateToken = (id) => {
 };
 
 const updatePay = asyncHandler(async (req, res) => {
-  
   const user = await User.findById(req.params.id);
   if (user) {
     user.hourlyRate = req.body.hourlyRate;
