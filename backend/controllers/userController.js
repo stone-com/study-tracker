@@ -85,8 +85,21 @@ const generateToken = (id) => {
   });
 };
 
+const updatePay = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (user) {
+    user.hourlyRate = req.body.hourlyRate;
+    await user.save();
+    res.status(200).json(user);
+  } else {
+    res.status(400);
+    throw new Error('Error updating');
+  }
+});
+
 module.exports = {
   registerUser,
   loginUser,
   getMe,
+  updatePay,
 };
