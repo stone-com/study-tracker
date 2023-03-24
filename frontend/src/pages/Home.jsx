@@ -74,6 +74,8 @@ const Home = () => {
                 hours={clockout.hoursWorked}
                 comment={clockout.comment}
                 key={clockout._id}
+                id={clockout._id}
+                paid={clockout.paid}
               />
             ))
             .reverse()}

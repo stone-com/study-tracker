@@ -38,6 +38,13 @@ export const clockApi = createApi({
       }),
       invalidatesTags: ['ClockOuts', 'MostRecentClockIn'],
     }),
+    markAsPaid: builder.mutation({
+      query: (id) => ({
+        url: `/clock/${id}`,
+        method: 'PUT',
+      }),
+      invalidatesTags: ['ClockOuts'],
+    }),
   }),
 });
 
@@ -46,4 +53,5 @@ export const {
   useAddClockInMutation,
   useAddClockOutMutation,
   useGetMostRecentClockInQuery,
+  useMarkAsPaidMutation,
 } = clockApi;
