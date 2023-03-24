@@ -1,7 +1,15 @@
+import { useState } from 'react';
 import { useGetClockOutsQuery } from '../features/clock/clockApi';
+import { useSelector } from 'react-redux';
+import UpdatePayForm from './UpdatePayForm';
+import Modal from 'react-modal';
+Modal.setAppElement('#root');
+
 
 const Stats = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const { data } = useGetClockOutsQuery();
+  const { user } = useSelector((state) => state.auth);
 
   let hoursArray;
   let totalHours;
@@ -13,7 +21,10 @@ const Stats = () => {
     averageHours = (totalHours / hoursArray.length).toFixed(2);
   }
 
-  const hourlyPay = 0.5;
+  const hourlyRate = user.hourlyRate | 1;
+
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
 
   return (
     <>
@@ -24,9 +35,17 @@ const Stats = () => {
         </div>
       </div>
       <div className='statsContainer'>
-        <div>Hourly Pay: ${hourlyPay}</div>
-        <div>Total Earnings: ${totalHours * hourlyPay}</div>
+        <div>Hourly Pay: ${hourlyRate} <button onClick={openModal}>Update</button></div>
+        <div>Total Earnings: ${totalHours * hourlyRate}</div>
       </div>
+      
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={closeModal}
+        contentLabel='Update Pay Form'
+      >
+        <UpdatePayForm closeModal={closeModal} />
+      </Modal>
     </>
   );
 };
