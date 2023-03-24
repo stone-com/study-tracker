@@ -22,6 +22,7 @@ const login = async (userData) => {
 
 // Update user pay
 const updatePay = async (userData) => {
+  console.log(userData);
   const response = await axios.put(
     API_URL + '/setpay/' + userData.id,
     userData
