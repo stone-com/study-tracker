@@ -5,6 +5,20 @@ import UpdatePayForm from './UpdatePayForm';
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
 
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    border: '3px solid',
+    borderRadius: '10px',
+    backgroundColor: '#52d1dcff',
+  },
+};
+
 const Stats = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { data } = useGetClockOutsQuery();
@@ -35,7 +49,10 @@ const Stats = () => {
       </div>
       <div className='statsContainer'>
         <div>
-          Hourly Pay: ${hourlyRate} <button onClick={openModal}>Update</button>
+          Hourly Pay: ${hourlyRate}{' '}
+          <button onClick={openModal} className='openModalBtn'>
+            Update
+          </button>
         </div>
         <div>Total Earnings: ${totalHours * hourlyRate}</div>
       </div>
@@ -44,8 +61,9 @@ const Stats = () => {
         isOpen={isOpen}
         onRequestClose={closeModal}
         contentLabel='Update Pay Form'
+        style={customStyles}
       >
-        <UpdatePayForm closeModal={closeModal} />
+        <UpdatePayForm closeModal={closeModal} hourlyRate={hourlyRate} />
       </Modal>
     </>
   );

@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updatePay } from '../features/auth/authSlice';
 
-const UpdatePayForm = ({ closeModal }) => {
-  const [payRate, setPayRate] = useState('');
+const UpdatePayForm = ({ closeModal, hourlyRate }) => {
+  const [payRate, setPayRate] = useState(hourlyRate);
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 
@@ -16,17 +16,20 @@ const UpdatePayForm = ({ closeModal }) => {
   };
 
   return (
-    <form onSubmit={updatePayRate}>
+    <form onSubmit={updatePayRate} className='updatePayForm'>
       <label>
         Hourly Pay Rate:
         <input
+          className='payInput'
           type='number'
           step='0.01'
           value={payRate}
           onChange={(e) => setPayRate(e.target.value)}
         />
       </label>
-      <button type='submit'>Update Pay Rate</button>
+      <button type='submit' className='submitModalBtn'>
+        Update Pay Rate
+      </button>
     </form>
   );
 };
