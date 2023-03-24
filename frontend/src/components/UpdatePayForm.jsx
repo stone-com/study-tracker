@@ -1,13 +1,17 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { updatePay } from '../features/auth/authSlice';
 
 const UpdatePayForm = ({ closeModal }) => {
   const [payRate, setPayRate] = useState('');
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
 
   const updatePayRate = (e) => {
     e.preventDefault();
     console.log('New pay rate:', payRate);
+    dispatch(updatePay(user._id, { hourlyRate: payRate }));
     closeModal();
-    // Here you can perform some action with the new pay rate, like sending it to a server
   };
 
   return (
@@ -18,7 +22,7 @@ const UpdatePayForm = ({ closeModal }) => {
           type='number'
           step='0.01'
           value={payRate}
-          onChange={(event) => setPayRate(event.target.value)}
+          onChange={(e) => setPayRate(e.target.value)}
         />
       </label>
       <button type='submit'>Update Pay Rate</button>

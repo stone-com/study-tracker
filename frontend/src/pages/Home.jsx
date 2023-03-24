@@ -41,7 +41,7 @@ const Home = () => {
           {mostRecentClockIn?.isClockedOut || !mostRecentClockIn ? 'Out' : 'In'}
         </p>
         <p>
-          {mostRecentClockIn & !mostRecentClockIn.isClockedOut
+          {mostRecentClockIn & !mostRecentClockIn?.isClockedOut
             ? `Clocked in at ${new Date(
                 mostRecentClockIn.startTime
               ).toLocaleTimeString('en-US')}`
