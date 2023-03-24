@@ -16,6 +16,9 @@ const Navbar = () => {
     navigate('/');
   };
 
+
+
+
   return (
     <header className='header'>
       <div className='logo'>Timeclock App</div>
