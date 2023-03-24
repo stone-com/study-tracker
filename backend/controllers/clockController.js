@@ -100,9 +100,23 @@ const getMostRecentClockIn = asyncHandler(async (req, res) => {
   res.status(200).json(clockin);
 });
 
+// Mark a clockout as paid
+// PUT /api/clock/:id
+const markAsPaid = asyncHandler(async (req, res) => {
+  const clockout = await ClockOut.findById(req.params.id);
+  if (!clockout) {
+    res.status(401);
+    throw new Error('Shift not found');
+  }
+  clockout.paid = true;
+  await clockout.save();
+  res.status(200).json(clockout);
+});
+
 module.exports = {
   createClockIn,
   createClockOut,
   getClockouts,
   getMostRecentClockIn,
+  markAsPaid,
 };
