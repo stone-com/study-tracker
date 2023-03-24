@@ -125,6 +125,15 @@ h1 {
   color: var(--battleship-gray);
 }
 
+.hourly {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 1.5rem;
+}
+
 .form {
   width: 70%;
   margin: 0 auto;

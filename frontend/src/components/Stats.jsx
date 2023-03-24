@@ -33,6 +33,7 @@ const Stats = () => {
   let filteredWeekly;
   let weeklyHoursArray;
   let totalWeeklyHours;
+  let weeklyAverageHours;
 
   if (data) {
     // Map through all shifts and get only hoursworked value
@@ -51,6 +52,8 @@ const Stats = () => {
     weeklyHoursArray = filteredWeekly?.map((shift) => shift.hoursWorked);
     // reduce weeklyhours Array to get sum of total hours worked
     totalWeeklyHours = weeklyHoursArray.reduce((a, b) => a + b, 0).toFixed(2);
+    // Get average shift length for the week
+    weeklyAverageHours = (totalWeeklyHours / filteredWeekly.length).toFixed(2);
   }
 
   const hourlyRate = user.hourlyRate ? user.hourlyRate : 1;
@@ -60,28 +63,32 @@ const Stats = () => {
 
   return (
     <>
+      <h2 className='label'>Overall Stats</h2>
       <div className='statsContainer'>
         <div>
           <strong>Total Hours Worked:</strong> {totalHours}
         </div>
         <div>
-          <strong>Hours Worked This Week:</strong> {totalWeeklyHours}
+          <strong>Total Earnings:</strong> $
+          {(totalHours * hourlyRate).toFixed(2)}
         </div>
         <div>
           <strong>Average Shift Length:</strong>{' '}
           {isNaN(averageHours) ? 0 : averageHours} hours
         </div>
       </div>
+      <h2 className='label'>Weekly Stats</h2>
       <div className='statsContainer'>
         <div>
-          <strong>Hourly Pay:</strong> ${hourlyRate}{' '}
-          <button onClick={openModal} className='openModalBtn'>
-            Update
-          </button>
+          <strong>Hours Worked This Week:</strong> {totalWeeklyHours}
         </div>
         <div>
-          <strong>Total Earnings:</strong> $
-          {(totalHours * hourlyRate).toFixed(2)}
+          <strong>Weekly Earnings:</strong> $
+          {(totalWeeklyHours * hourlyRate).toFixed(2)}
+        </div>
+        <div>
+          <strong>Average Shift Length:</strong>{' '}
+          {isNaN(weeklyAverageHours) ? 0 : weeklyAverageHours} hours
         </div>
 
         <Modal
@@ -92,6 +99,14 @@ const Stats = () => {
         >
           <UpdatePayForm closeModal={closeModal} hourlyRate={hourlyRate} />
         </Modal>
+      </div>
+      <div className='hourly'>
+        <div>
+          <strong>Hourly Pay:</strong> ${hourlyRate.toFixed(2)}{' '}
+        </div>
+        <button onClick={openModal} className='openModalBtn'>
+          Update
+        </button>
       </div>
     </>
   );

@@ -59,7 +59,7 @@ const Home = () => {
           </div>
         )}
       </section>
-      <h2 className='label'>Your Stats</h2>
+
       <Stats />
       <h2 className='label'>Your shifts</h2>
 
@@ -67,6 +67,7 @@ const Home = () => {
         selectedOption={selectedOption}
         setSelectedOption={setSelectedOption}
       />
+      {/* ALL SHIFTS */}
       <div className='container shiftGroup'>
         {selectedOption === 'all' &&
           clockOuts &&
@@ -83,7 +84,7 @@ const Home = () => {
               />
             ))
             .reverse()}
-
+        {/* PAID SHIFTS */}
         {selectedOption === 'paid' &&
           clockOuts &&
           clockOuts
@@ -100,23 +101,34 @@ const Home = () => {
               />
             ))
             .reverse()}
-
-        {selectedOption === 'unpaid' &&
-          clockOuts &&
-          clockOuts
-            .filter((clockout) => clockout.paid === false)
-            .map((clockout) => (
-              <Shift
-                startTime={clockout.startTime}
-                endTime={clockout.endTime}
-                hours={clockout.hoursWorked}
-                comment={clockout.comment}
-                key={clockout._id}
-                id={clockout._id}
-                paid={clockout.paid}
-              />
-            ))
-            .reverse()}
+        {/* UNPAID SHIFTS */}
+        {selectedOption === 'unpaid' && clockOuts && (
+          <>
+            <h2 className='label'>
+              Total Unpaid: $
+              {(
+                clockOuts
+                  .filter((clockout) => clockout.paid === false)
+                  .map((shift) => shift.hoursWorked)
+                  .reduce((a, b) => a + b, 0) * user.hourlyRate
+              ).toFixed(2)}
+            </h2>
+            {clockOuts
+              .filter((clockout) => clockout.paid === false)
+              .map((clockout) => (
+                <Shift
+                  startTime={clockout.startTime}
+                  endTime={clockout.endTime}
+                  hours={clockout.hoursWorked}
+                  comment={clockout.comment}
+                  key={clockout._id}
+                  id={clockout._id}
+                  paid={clockout.paid}
+                />
+              ))
+              .reverse()}
+          </>
+        )}
       </div>
     </div>
   );

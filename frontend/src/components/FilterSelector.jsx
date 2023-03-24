@@ -1,9 +1,6 @@
-import { useState } from 'react';
-
 const FilterSelector = ({ selectedOption, setSelectedOption }) => {
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
-    console.log(event.target.value);
   };
   return (
     <div className='radioContainer'>
