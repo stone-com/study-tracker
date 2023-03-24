@@ -46,7 +46,9 @@ h1 {
   padding: 0;
   text-align: center;
 }
-
+.clockInfo {
+  margin-bottom: 15px;
+}
 
 .shiftContainer,
 .statsContainer {
@@ -57,7 +59,20 @@ h1 {
   border: 1px solid var(--cadet-gray);
   margin: 13px 0px;
   border-radius: 5px;
+}
+.statsContainer {
   margin-inline: 10px;
+}
+
+.shiftContainer {
+  margin-inline: 13%;
+}
+
+.shiftInfo {
+  display: flex;
+  justify-content: space-around;
+  width: 100%
+
 }
 
 .header {
@@ -233,6 +248,7 @@ h1 {
   text-align: center;
 }
 
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -253,5 +269,15 @@ h1 {
 
   .heading p {
     font-size: 1.5rem;
+  }
+}
+@media (max-width: 480px) {
+  .shiftContainer {
+    flex-direction: column;
+    margin-inline: 10px;
+    padding-bottom: 7px;
+  }
+  .payBtn {
+    margin-top: 5px;
   }
 }

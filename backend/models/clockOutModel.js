@@ -18,9 +18,9 @@ const ClockOutSchema = new mongoose.Schema({
     required: true,
     ref: 'User',
   },
-  comment: {
-    type: String,
-    required: false,
+  paid: {
+    type: Boolean,
+    default: false,
   },
 });
 

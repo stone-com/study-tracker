@@ -55,16 +55,16 @@ const Stats = () => {
           </button>
         </div>
         <div>Total Earnings: ${(totalHours * hourlyRate).toFixed(2)}</div>
-      </div>
 
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={closeModal}
-        contentLabel='Update Pay Form'
-        style={customStyles}
-      >
-        <UpdatePayForm closeModal={closeModal} hourlyRate={hourlyRate} />
-      </Modal>
+        <Modal
+          isOpen={isOpen}
+          onRequestClose={closeModal}
+          contentLabel='Update Pay Form'
+          style={customStyles}
+        >
+          <UpdatePayForm closeModal={closeModal} hourlyRate={hourlyRate} />
+        </Modal>
+      </div>
     </>
   );
 };

@@ -40,7 +40,7 @@ const Home = () => {
     <div>
       <section className='heading'>
         <h1>Hello {user && user.name}</h1>
-        <p>
+        <p className='clockInfo'>
           {mostRecentClockIn?.isClockedOut || !mostRecentClockIn
             ? 'You are currently clocked out'
             : `Clocked in at ${new Date(
