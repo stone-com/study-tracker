@@ -21,8 +21,9 @@ const login = async (userData) => {
 };
 
 // Update user pay
-const updatePay = async (userId, hourlyRate) => {
-  const response = await axios.put(API_URL + '/setpay/' + userId, hourlyRate);
+const updatePay = async (userInfo) => {
+  const {id, hourlyRate} = userInfo
+  const response = await axios.put(API_URL + '/setpay/' + id, hourlyRate);
   if (response.data) {
     localStorage.setItem('user', JSON.stringify(response.data));
   }

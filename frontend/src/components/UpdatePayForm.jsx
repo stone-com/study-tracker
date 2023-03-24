@@ -10,7 +10,7 @@ const UpdatePayForm = ({ closeModal }) => {
   const updatePayRate = (e) => {
     e.preventDefault();
     console.log('New pay rate:', payRate);
-    dispatch(updatePay(user._id, { hourlyRate: payRate }));
+    dispatch(updatePay({ id: user._id, hourlyPay: payRate }));
     closeModal();
   };
 
